@@ -1,0 +1,8 @@
+project:
+    name: Lightning Workbench
+    package:
+        name: Lightning Workbench
+        namespace: szLWB
+        api_version: 39.0
+    test:
+        name_match: "%Test"
