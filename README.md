@@ -1,4 +1,4 @@
-# LightningWorkbench
+# Lightning Workbench
 Tools for awesome Salesforce Admins and Devs
 
 # Purpose
