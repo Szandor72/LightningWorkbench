@@ -1,5 +1,8 @@
 #ForceCode
 force.json
+.vim-force.com
+
+#Git
 .gitignore
 
 # Windows image file caches
