@@ -1,5 +1,5 @@
 @isTest
-public class SobjectServiceTest {
+public class SObjectServiceTest {
     @isTest
     public static void retrievebyID_Success() {
         Account a = new Account (Name = 'TestRetrieve');
