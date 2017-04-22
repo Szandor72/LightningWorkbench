@@ -2,7 +2,7 @@ project:
     name: Lightning Workbench
     package:
         name: Lightning Workbench
-        namespace: apo_pkg20
+        namespace: szLWB
         api_version: 39.0
     test:
         name_match: "%Test"
