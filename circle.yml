@@ -17,7 +17,6 @@ dependencies:
     - 'echo $SFDX_HUB_ORG > ~/.appcloud/hubOrg.json'
     - 'heroku plugins:install salesforcedx'
     - 'heroku force --help'
-    - 'heroku force update'
 test:
   pre:
     - 'if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run ci_master --org packaging; fi'
