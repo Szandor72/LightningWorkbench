@@ -1,0 +1,6 @@
+{
+    "DefaultArtifact": "src",
+    "SfdcLoginUrl" : "https://login.salesforce.com",
+    "ApiVersion": "39.0",
+    "EnableTokenEncryption": false
+}
