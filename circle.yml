@@ -23,8 +23,3 @@ test:
     - 'cp test_results.xml $CIRCLE_TEST_REPORTS/junit/'
     - 'if [[ $CIRCLE_BRANCH != "master" ]]; then cp test_results.json $CIRCLE_ARTIFACTS; fi'
     #- 'if [[ $CIRCLE_BRANCH != "master" ]]; then cci task run apextestsdb_upload; fi'
-deployment:
-  master_to_feature:
-    branch: master
-    commands:
-      - 'cci task run github_master_to_feature'
