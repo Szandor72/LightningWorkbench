@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+    <lightning:card iconName="utility:database">
+        <aura:set attribute="title">
+            retrieve sObject by Id
+        </aura:set>
+        <c:retrievesObject />
+    </lightning:card>
+</aura:component>

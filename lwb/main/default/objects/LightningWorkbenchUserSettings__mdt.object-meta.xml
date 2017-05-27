@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Stores settings for Lightning Workbench Users</description>
+    <fields>
+        <fullName>bEditSObjectRetrieve__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If set to true a user can edit sObject in retrieve Component</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>If set to true a user can edit sObject in retrieve Component</inlineHelpText>
+        <label>allow Edit on sObject Retrieve</label>
+        <type>Checkbox</type>
+    </fields>
+    <label>Lightning Workbench User Setting</label>
+    <pluralLabel>Lightning Workbench User Settings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>
