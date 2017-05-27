@@ -4,6 +4,7 @@ Tools for awesome Salesforce Admins and Devs
 # Purpose
 Open Source Package that functions 
  1) as a test package for a CumulusCI setup 
+ 2) as a test package for SalesforceDX workflow - cf. http://www.shoreforce.net (German)
  2) attempt at providing some Salesforce Workbench Functions and other Goodies within Salesforce Lightning Experience
 
 # Functions
