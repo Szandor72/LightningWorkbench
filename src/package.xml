@@ -3,9 +3,9 @@
     <fullName>Lightning Workbench</fullName>
     <description>An Open Source attempt at recreating some Workbench Features as Lightning Components</description>
     <types>
-        <members>AuraActionResponse</members>
-        <members>SObjectRetrieveTest</members>
+        <members>AuraActionResponse</members>        
         <members>SObjectService</members>
+		<members>SObjectServiceTest</members>
         <members>retrieveSObjectController</members>
         <members>retrieveSObjectControllerTest</members>
         <name>ApexClass</name>
