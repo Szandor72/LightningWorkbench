@@ -1,9 +1,11 @@
-#ForceCode
-force.json
+#Salesforce (DX, force code, etc)
 .vim-force.com
-
-#Git
-.gitignore
+.vscode
+force.json
+.sfdx
+config/
+*.sublime-project
+*.sublime-workspace
 
 # Windows image file caches
 Thumbs.db
@@ -52,6 +54,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-.vim-force.com
-.vscoce
-force.json
+
