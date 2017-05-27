@@ -1,7 +1,6 @@
 {
   "PackageDirectories" : [
-            { "Path" : "lwb", "Default": true},
-            { "Path" : "src" }
+            { "Path" : "lwb", "Default": true}
   ],
   "Namespace": "",
   "SfdcLoginUrl": "https://login.salesforce.com",
