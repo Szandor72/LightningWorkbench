@@ -19,7 +19,7 @@
     <aura:handler event="c:retrievesObjectEvent" action="{!c.handleRetrievesObjectEvent}"/>
     <aura:handler name="change" value="{!v.recordId}" action="{!c.onRecordIdChange}"/>
     <!--body -->
-    <aura:if isTrue="{!v.fields.length > 0}">
+    <aura:if isTrue="{!v.recordId}">
         <lightning:card iconName="action:apex">
             <aura:set attribute="title">
                 Viewing {!v.sObjectName.length > 0 ? v.sObjectName : 'sObject'}

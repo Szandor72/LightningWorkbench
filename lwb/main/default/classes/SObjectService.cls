@@ -1,6 +1,6 @@
 public class SObjectService {
     public class SObjectServiceException extends exception {  }
-
+    
     @AuraEnabled
     public static Map<String,Object> retrieve(String recordId) {
         if(!(recordId instanceOf Id)) {

@@ -11,10 +11,6 @@
         <name>ApexClass</name>
     </types>
     <types>
-        <members>recordCloneRecent</members>
-        <name>ApexPage</name>
-    </types>
-    <types>
         <members>retrievesObject</members>
         <members>retrievesObjectCard</members>
         <members>retrievesObjectEvent</members>
@@ -30,41 +26,13 @@
         <name>CustomApplication</name>
     </types>
     <types>
-        <members>LightningWorkbenchDevSettings__mdt.bEditSObjectRetrieve__c</members>
-        <members>LightningWorkbenchUserSettings__mdt.bEditSObjectRetrieve__c</members>
-        <members>RecordClones__c.originalStateJSON__c</members>
-        <members>RecordClones__c.sObjectId__c</members>
-        <name>CustomField</name>
-    </types>
-    <types>
-        <members>LightningWorkbenchDevSettings__mdt</members>
-        <members>LightningWorkbenchUserSettings__mdt</members>
-        <members>RecordClones__c</members>
-        <name>CustomObject</name>
-    </types>
-    <types>
         <members>Lightning_Workbench_Home</members>
-        <members>RecordClones__c</members>
         <name>CustomTab</name>
     </types>
     <types>
         <members>LightningWorkbenchHome</members>
         <members>Lightning_Workbench_UtilityBar</members>
         <name>FlexiPage</name>
-    </types>
-    <types>
-        <members>LightningWorkbenchDevSettings__mdt-Lightning Workbench Dev Setting Layout</members>
-        <members>LightningWorkbenchUserSettings__mdt-Lightning Workbench User Setting Layout</members>
-        <members>RecordClones__c-Record Clone Layout</members>
-        <name>Layout</name>
-    </types>
-    <types>
-        <members>RecordClones__c.All</members>
-        <name>ListView</name>
-    </types>
-    <types>
-        <members>RecordClones__c.recordCloneCheckIDLength</members>
-        <name>ValidationRule</name>
     </types>
     <version>39.0</version>
 </Package>
