@@ -12,7 +12,7 @@ dependencies:
     - cd CumulusCI; git checkout master; pip install -r requirements.txt
     - wget -qO- $DX_URL | tar xJf -
     - sudo ./sfdx/install
-    - sudo chmod 777 ./.cache/sfdx/ -R
+    - sudo chmod 777 /home/ubuntu/.cache/sfdx -R
     - sfdx update
     - mkdir tmp
     - echo $SSL_SERVER_KEY_HEX | xxd -r -ps >> tmp/server.key
