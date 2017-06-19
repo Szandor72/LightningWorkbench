@@ -17,7 +17,7 @@ test:
     - 'if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run ci_master --org packaging; fi'
     - 'if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run release_beta --org packaging; fi'
   override:
-    - 'if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run ci_beta --org beta; else cci flow run ci_feature --org feature; fi'
+    - 'if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run ci_beta --org beta; else cci flow run ci_feature --org feature --delete-org; fi'
   post:
     - 'mkdir -p $CIRCLE_TEST_REPORTS/junit/'
     - 'cp test_results.xml $CIRCLE_TEST_REPORTS/junit/'
