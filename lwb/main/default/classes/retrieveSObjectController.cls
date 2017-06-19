@@ -1,12 +1,4 @@
 public with sharing class retrieveSObjectController {
-    //TODO implement, SOQL only here to create dependency
-    @AuraEnabled
-    public static AuraActionResponse checkSettings(){
-        LightningWorkbenchDevSettings__mdt[] devSettings = [SELECT MasterLabel, QualifiedApiName, bEditSobjectRetrieve__c FROM LightningWorkbenchDevSettings__mdt];
-        LightningWorkbenchUserSettings__mdt[] userSettings = [SELECT MasterLabel, QualifiedApiName, bEditSobjectRetrieve__c FROM LightningWorkbenchUserSettings__mdt];
-        return new AuraActionResponse();
-    }
-
     @AuraEnabled
     public static AuraActionResponse retrieveSObject(String recordId){
         try {

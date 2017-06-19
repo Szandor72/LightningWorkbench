@@ -12,21 +12,6 @@
             </componentInstanceProperties>
             <componentName>forceChatter:exposedFeed</componentName>
         </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>height</name>
-                <value>300</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>label</name>
-                <value>Recent Record Clones</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>pageName</name>
-                <value>recordCloneRecent</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:visualforcePage</componentName>
-        </componentInstances>
         <name>region1</name>
         <type>Region</type>
     </flexiPageRegions>

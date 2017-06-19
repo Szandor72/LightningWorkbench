@@ -18,7 +18,6 @@
     <tab>standard-Opportunity</tab>
     <tab>standard-Pricebook2</tab>
     <tab>standard-File</tab>
-    <tab>RecordClones__c</tab>
     <uiType>Lightning</uiType>
     <utilityBar>Lightning_Workbench_UtilityBar</utilityBar>
 </CustomApplication>
