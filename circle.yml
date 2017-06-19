@@ -13,7 +13,7 @@ dependencies:
     - wget -qO- $DX_URL | tar xJf -
     - sudo ./sfdx/install
     - sudo chmod 777 /home/ubuntu/.cache/sfdx -R
-    - sfdx update
+    - sudo sfdx update
     - mkdir tmp
     - echo $SSL_SERVER_KEY_HEX | xxd -r -ps >> tmp/server.key
     - openssl rsa -in tmp/server.key -check -noout
