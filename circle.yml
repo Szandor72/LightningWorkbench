@@ -11,7 +11,8 @@ dependencies:
     - git clone git@github.com:Szandor72/CumulusCI
     - cd CumulusCI; git checkout master; pip install -r requirements.txt
     - wget -qO- $DX_URL | tar xJf -
-    - ./sfdx/install
+    - sudo ./sfdx/install
+    - sfdx update
     - mkdir tmp
     - echo $SSL_SERVER_KEY_HEX | xxd -r -ps >> tmp/server.key
     - openssl rsa -in tmp/server.key -check -noout
@@ -21,7 +22,6 @@ test:
     - if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run ci_master --org packaging; fi
     - if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run release_beta --org packaging; fi
   override:
-    - if [[ $CIRCLE_BRANCH != "master" ]]; then sfdx force --help; fi
     - if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run ci_beta --org beta --delete-org; else cci flow run ci_feature --org feature --delete-org; fi
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
