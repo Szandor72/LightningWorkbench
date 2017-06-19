@@ -10,7 +10,7 @@
             <componentInstanceProperties>
                 <name>height</name>
                 <type>decorator</type>
-                <value>170</value>
+                <value>480</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>icon</name>
@@ -20,44 +20,7 @@
             <componentInstanceProperties>
                 <name>label</name>
                 <type>decorator</type>
-                <value>retrieve sObject</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>scrollable</name>
-                <type>decorator</type>
-                <value>true</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>width</name>
-                <type>decorator</type>
-                <value>480</value>
-            </componentInstanceProperties>
-            <componentName>retrievesObject</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>context</name>
-                <value>TO</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>eager</name>
-                <type>decorator</type>
-                <value>true</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>height</name>
-                <type>decorator</type>
-                <value>480</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>icon</name>
-                <type>decorator</type>
-                <value>comments</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>label</name>
-                <type>decorator</type>
-                <value>Chatter Feed</value>
+                <value>retrievesObject</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>scrollable</name>
@@ -69,7 +32,7 @@
                 <type>decorator</type>
                 <value>340</value>
             </componentInstanceProperties>
-            <componentName>forceChatter:exposedFeed</componentName>
+            <componentName>retrievesObject</componentName>
         </componentInstances>
         <name>utilityItems</name>
         <type>Region</type>
