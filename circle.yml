@@ -14,6 +14,7 @@ dependencies:
     - sudo ./sfdx/install
     - sudo chmod 777 /home/ubuntu/.cache/sfdx -R
     - sudo sfdx update
+    - sudo chmod 777 /home/ubuntu/.sfdx/ -R
     - mkdir tmp
     - echo $SSL_SERVER_KEY_HEX | xxd -r -ps >> tmp/server.key
     - openssl rsa -in tmp/server.key -check -noout
