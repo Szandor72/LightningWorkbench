@@ -3,9 +3,6 @@
     <description>Home Page for Lightning Workbench App</description>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>retrievesObjectResult</componentName>
-        </componentInstances>
-        <componentInstances>
             <componentInstanceProperties>
                 <name>context</name>
                 <value>BOOKMARKS</value>
