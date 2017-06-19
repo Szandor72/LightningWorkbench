@@ -7,7 +7,9 @@ machine:
 dependencies:
   override:
     - pip install --upgrade pip
-    - pip install --upgrade cumulusci
+    #- pip install --upgrade cumulusci
+    - git clone git@github.com:Szandor72/CumulusCI
+    - cd CumulusCI; git checkout master; pip install
     - wget -qO- $DX_URL | tar xJf -
     - ./sfdx/install
     - mkdir tmp
