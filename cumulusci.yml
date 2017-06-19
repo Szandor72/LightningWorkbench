@@ -2,7 +2,9 @@ project:
     name: Lightning Workbench
     package:
         name: Lightning Workbench
+        name_manged: Lightning Workbench
         namespace: szLWB
-        api_version: 39.0
+        api_version: 40.0
+        description: An Open Source attempt at recreating some Workbench Features as Lightning Components
     test:
         name_match: "%Test"

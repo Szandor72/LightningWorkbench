@@ -2,10 +2,10 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Lightning Workbench</fullName>
     <description>An Open Source attempt at recreating some Workbench Features as Lightning Components</description>
-    <types>
-        <members>AuraActionResponse</members>        
+     <types>
+        <members>AuraActionResponse</members>
         <members>SObjectService</members>
-		<members>SObjectServiceTest</members>
+        <members>SObjectServiceTest</members>
         <members>retrieveSObjectController</members>
         <members>retrieveSObjectControllerTest</members>
         <name>ApexClass</name>
@@ -34,5 +34,5 @@
         <members>Lightning_Workbench_UtilityBar</members>
         <name>FlexiPage</name>
     </types>
-    <version>39.0</version>
+    <version>40.0</version>
 </Package>
