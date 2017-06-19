@@ -13,6 +13,7 @@ dependencies:
     - wget -qO- $DX_URL | tar xJf -
     - sudo ./sfdx/install
     - sudo chmod 777 /home/ubuntu/.cache/sfdx -R
+    - sudo sfdx plugins:install salesforcedx@pre-release
     - sudo sfdx update
     - sudo chmod 777 /home/ubuntu/.sfdx/ -R
     - mkdir tmp
