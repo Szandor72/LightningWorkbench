@@ -19,6 +19,7 @@ dependencies:
     - echo $SSL_SERVER_KEY_HEX | xxd -r -ps >> tmp/server.key
     - openssl rsa -in tmp/server.key -check -noout
     - sfdx force:auth:jwt:grant --clientid $DX_CONSUMER_KEY --jwtkeyfile tmp/server.key --username $DX_USER --setdefaultdevhubusername
+    - sfdx force:org:create -f orgs/feature.json --loglevel DEBUG
 test:
   pre:
     - if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run ci_master --org packaging; fi
