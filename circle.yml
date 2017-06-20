@@ -1,3 +1,7 @@
+general:
+  branches:
+    ignore:
+      - /feature\/.*/
 machine:
   python:
     version: 2.7.12
