@@ -14,16 +14,16 @@ dependencies:
     #- pip install --upgrade cumulusci
     - git clone git@github.com:Szandor72/CumulusCI
     - cd CumulusCI; git checkout master; pip install -e .
-    - wget -qO- $DX_URL | tar xJf -
-    - sudo ./sfdx/install
-    - sudo chmod 777 /home/ubuntu/.cache/sfdx -R
-    - sudo sfdx plugins:install salesforcedx@pre-release
-    - sudo sfdx update
-    - sudo chmod 777 /home/ubuntu/.sfdx/ -R
-    - mkdir tmp
-    - echo $SSL_SERVER_KEY_HEX | xxd -r -ps >> tmp/server.key
-    - openssl rsa -in tmp/server.key -check -noout
-    - sfdx force:auth:jwt:grant --clientid $DX_CONSUMER_KEY --jwtkeyfile tmp/server.key --username $DX_USER --setdefaultdevhubusername
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then wget -qO- $DX_URL | tar xJf -; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then sudo ./sfdx/install; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then sudo chmod 777 /home/ubuntu/.cache/sfdx -R; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then sudo sfdx plugins:install salesforcedx@pre-release; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then sudo sfdx update; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then sudo chmod 777 /home/ubuntu/.sfdx/ -R; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then mkdir tmp; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then echo $SSL_SERVER_KEY_HEX | xxd -r -ps >> tmp/server.key; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then openssl rsa -in tmp/server.key -check -noout; fi 
+    - if [[ $CIRCLE_BRANCH != "master" ]]; then sfdx force:auth:jwt:grant --clientid $DX_CONSUMER_KEY --jwtkeyfile tmp/server.key --username $DX_USER --setdefaultdevhubusername; fi 
 test:
   pre:
     - if [[ $CIRCLE_BRANCH == "master" ]]; then cci flow run ci_master --org packaging; fi
