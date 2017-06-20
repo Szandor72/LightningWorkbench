@@ -3,9 +3,12 @@
 .vscode
 force.json
 .sfdx
-config/
 *.sublime-project
 *.sublime-workspace
+
+#CCI
+test_results.json
+test_results.xml
 
 # Windows image file caches
 Thumbs.db
