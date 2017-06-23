@@ -16,7 +16,7 @@
         evt.setParams({
             componentDef : "c:retrievesObjectResult",
             componentAttributes: {
-                recordId : component.get("v.revordId")
+                recordId : component.get("v.recordId")
             }
         });
         evt.fire();
