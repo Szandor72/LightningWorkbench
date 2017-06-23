@@ -10,6 +10,9 @@ machine:
     DX_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-v5.7.6-d42cf65-linux-amd64.tar.xz
 dependencies:
   override:
+    - heroku plugins:install salesforce-lightning-cli
+    - heroku lightning:lint ./src/aura/ >> ${CIRCLE_ARTIFACTS}/lightningLintReport.txt
+    - sh ./tests/checkLightningLintReport.sh
     - pip install --upgrade pip
     #- pip install --upgrade cumulusci
     - git clone git@github.com:Szandor72/CumulusCI
