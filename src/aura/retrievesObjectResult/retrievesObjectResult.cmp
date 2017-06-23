@@ -1,5 +1,5 @@
-<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId"
-                access="global"
+<aura:component implements="force:hasRecordId"
+                access="public"
                 controller="retrieveSObjectController">
     <!-- attributes -->
     <aura:attribute name="fields"
