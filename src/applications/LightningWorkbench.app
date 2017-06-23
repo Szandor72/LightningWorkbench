@@ -9,7 +9,6 @@
     <formFactors>Large</formFactors>
     <label>Lightning Workbench</label>
     <navType>Standard</navType>
-    <tab>Lightning_Workbench_Home</tab>
     <tab>standard-Dashboard</tab>
     <tab>standard-Account</tab>
     <tab>standard-Contact</tab>
@@ -19,5 +18,4 @@
     <tab>standard-Pricebook2</tab>
     <tab>standard-File</tab>
     <uiType>Lightning</uiType>
-    <utilityBar>Lightning_Workbench_UtilityBar</utilityBar>
 </CustomApplication>
