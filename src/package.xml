@@ -10,7 +10,10 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>App</members>
+        <members>apo_QFXInputRedirect</members>
         <members>modal</members>
+        <members>redirect</members>
         <members>retrievesObject</members>
         <members>retrievesObjectCard</members>
         <members>retrievesObjectEvent</members>
