@@ -9,7 +9,6 @@
     <formFactors>Large</formFactors>
     <label>Lightning Workbench</label>
     <navType>Standard</navType>
-    <tab>standard-Dashboard</tab>
     <tab>standard-Account</tab>
     <tab>standard-Contact</tab>
     <tab>standard-Case</tab>
