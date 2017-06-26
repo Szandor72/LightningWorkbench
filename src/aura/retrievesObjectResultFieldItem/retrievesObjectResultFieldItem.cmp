@@ -1,0 +1,24 @@
+<aura:component access="global"
+    description="Receives field information by sObjectRetrieve and displays or edits accordingly">
+    <aura:attribute name="fieldInformation" type="Object" access="public" default="{}"
+        description="Holds Field Describe Information"/>
+    <aura:attribute name="inEditMode" type="Boolean" access="public" default="false"
+        description="If set to true will turn Value Fields into input fields"/>
+	<lightning:layout horizontalAlign="space">
+        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+            <b>{!v.fieldInformation.name}</b>
+        </lightning:layoutitem>
+        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+            {!v.fieldInformation.properties.label}
+        </lightning:layoutitem>
+        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+            <ui:outputCheckbox value="{!v.fieldInformation.properties.isUpdateable}"/>
+        </lightning:layoutitem>
+        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+            {!v.fieldInformation.properties.displayType}
+        </lightning:layoutitem>
+        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+            {!v.fieldInformation.properties.value}
+        </lightning:layoutitem>
+    </lightning:layout>
+</aura:component>

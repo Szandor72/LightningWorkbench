@@ -1,4 +1,4 @@
-<aura:component access="public">
+<aura:component access="global">
     <aura:attribute name="title" type="String" default="Title" required="true" access="public" description="Title of modal Header. Required. "/>
     <aura:attribute name="closeable" type="Boolean" default="true" access="public" description="Modal can be closed by user."/>
     <aura:attribute name="hideSubmit" type="Boolean" access="public" description="If true, the submit Button will not be rendered" default="false"/>

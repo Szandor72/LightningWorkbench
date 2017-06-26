@@ -1,8 +1,8 @@
-<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
     <lightning:card iconName="utility:database">
         <aura:set attribute="title">
             retrieve sObject by Id
         </aura:set>
-        <c:retrievesObject />
+        <c:retrievesObject recordId="{!v.recordId}"/>
     </lightning:card>
 </aura:component>

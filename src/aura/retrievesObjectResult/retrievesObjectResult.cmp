@@ -1,6 +1,7 @@
 <aura:component implements="force:hasRecordId"
                 access="global"
-                controller="retrieveSObjectController">
+                controller="retrieveSObjectController"
+                description="Given a recordId will display all fields. Also offers updates on values.">
     <!-- attributes -->
     <aura:attribute name="fields"
                     type="Object[]"
@@ -27,12 +28,13 @@
                 {!v.fields.Name.length > 0 ? v.fields.Name : ' with Id ' + v.recordId}
             </aura:set>
             <aura:set attribute="footer">
-                <lightning:badge label="{!'Last Modified by '+v.lastModifiedBy+' at '+v.lastModifiedDate}"/>
+                <lightning:badge label="provided with love by appero.com"/>
             </aura:set>
             <aura:set attribute="actions">
-                <lightning:button label="Edit" onclick="{!c.onEditButtonClick}"/>
+                <lightning:badge label="{!'Last Modified by '+v.lastModifiedBy+' at '+v.lastModifiedDate}"/>
+                &nbsp;<lightning:button label="Edit" onclick="{!c.onEditButtonClick}"/>
                 <lightning:button label="Refresh" onclick="{!c.onRecordIdChange}"/>
-                <lightning:button label="Close" onclick="{!c.onCloseButtonClick}"/>
+                <!--<lightning:button label="Close" onclick="{!c.onCloseButtonClick}"/>-->
             </aura:set>
             <!-- card body -->
             <aura:if isTrue="{!v.waiting}">
@@ -41,35 +43,25 @@
             <aura:if isTrue="{!!v.waiting}">
                 <p class="slds-p-horizontal--large">
                     <lightning:layout horizontalAlign="space">
-                        <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
-                            <p class="slds-text-heading--medium">Fieldname</p>
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">API Fieldname</p>
                         </lightning:layoutitem>
-                        <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Label</p>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
                             <p class="slds-text-heading--medium">Updateable</p>
                         </lightning:layoutitem>
-                        <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
                             <p class="slds-text-heading--medium">Type</p>
                         </lightning:layoutitem>
-                        <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
                             <p class="slds-text-heading--medium">Value</p>
                         </lightning:layoutitem>
-                        </lightning:layout>
-                        <aura:iteration items="{!v.fields}" var="field">
-                          <lightning:layout horizontalAlign="space">
-                            <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
-                                <b>{!field.name}</b>
-                            </lightning:layoutitem>
-                            <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
-                                <ui:outputCheckbox value="{!field.properties.isUpdateable}"/>
-                            </lightning:layoutitem>
-                            <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
-                                {!field.properties.displayType}
-                            </lightning:layoutitem>
-                            <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
-                                      {!field.properties.value}
-                            </lightning:layoutitem>
-                          </lightning:layout>
-                        </aura:iteration>
+                </lightning:layout>
+                <aura:iteration items="{!v.fields}" var="field">
+                    <c:retrievesObjectResultFieldItem fieldInformation="{!field}"/>
+                </aura:iteration>
                 </p>
             </aura:if>
         </lightning:card>

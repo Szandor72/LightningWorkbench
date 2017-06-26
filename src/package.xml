@@ -15,6 +15,7 @@
         <members>retrievesObjectCard</members>
         <members>retrievesObjectEvent</members>
         <members>retrievesObjectResult</members>
+        <members>retrievesObjectResultFieldItem</members>
         <name>AuraDefinitionBundle</name>
     </types>
     <types>

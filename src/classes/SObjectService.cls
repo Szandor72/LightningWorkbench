@@ -25,6 +25,7 @@ public class SObjectService {
                     fields.get(fieldname).put('picklistValues', fieldDescribe.getPicklistValues());
                 }
                 fields.get(fieldname).put('isUpdateable', fieldDescribe.isUpdateable());
+                fields.get(fieldname).put('label', fieldDescribe.getLabel());
             }
         }
         String strCommaSeperatedFieldnames = '';
