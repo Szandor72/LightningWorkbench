@@ -25,5 +25,9 @@
         <members>LightningWorkbench</members>
         <name>CustomApplication</name>
     </types>
+    <types>
+        <members>Lightning_Workbench_UtilityBar</members>
+        <name>FlexiPage</name>
+    </types>
     <version>40.0</version>
 </Package>
