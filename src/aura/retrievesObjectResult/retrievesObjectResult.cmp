@@ -1,36 +1,77 @@
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
-    <aura:registerEvent name="retrievesObjectEvent" type="c:retrievesObjectEvent"/>
-    <lightning:layout verticalAlign="end">
-        <lightning:layoutitem padding="around-small" size="8" flexibility="auto" class="validationFix">
-            <lightning:input label="Enter sObject Id" 
-                             name="recordId"
-                             value="{!v.recordId}"
-                             aura:id="input"
-                             placeholder="Enter 15 or 18 character sObject Id"
-                             messageWhenPatternMismatch="A valid sOject Id has 15 or 18 characters, only numbers and letters"
-                             pattern="(\w{18}|\w{15})"/>
-        </lightning:layoutitem>
-        <lightning:layoutitem padding="around-small" size="4" flexibility="auto">            
-            <lightning:button variant="neutral" 
-                              title="Click to retrieve fields" 
-                              label="Retrieve" 
-                              type="Submit" 
-                              name="retrieve"
-                              iconName="utility:search" 
-                              iconPosition="left" 
-                              disabled="{!if(v.recordId.length == 18,false,if(v.recordId.length == 15,false,true))}" 
-                              onclick="{!c.onRetrieveButtonClick}"/>
-        </lightning:layoutitem>    
-    </lightning:layout>
-    <lightning:layout verticalAlign="end">
-        <lightning:layoutitem padding="around-small" size="4" flexibility="no-flex" class="validationFix">
-            <ui:inputcheckbox label="open in Modal" change="{!c.openModal}"/>
-        </lightning:layoutitem>
-        <lightning:layoutitem padding="around-small" size="4" flexibility="no-flex" class="validationFix">
-            <ui:inputcheckbox label="open fullscreen" change="{!c.gotoResults}"/>
-        </lightning:layoutitem>
-    </lightning:layout>
-    <c:modal aura:id="modal">
-        <c:retrievesObjectResult recordId="{!v.recordId}"/>
-    </c:modal>
+<aura:component implements="force:hasRecordId"
+                access="global"
+                controller="retrieveSObjectController">
+    <!-- attributes -->
+    <aura:attribute name="fields"
+                    type="Object[]"
+                    access="private"
+                    description="DTO containing fieldDescribe information"
+                    />
+    <aura:attribute name="sObjectName"
+                    type="String"
+                    access="private"
+                    description="Name of the retrieved sObject"
+                    />
+    <aura:attribute name="lastModifiedBy" type="String" access="private" description="LostModifiedBy.Name"/>
+    <aura:attribute name="lastModifiedDate" type="Date" access="private" description="LastModifiedDate"/>
+    <aura:attribute name="waiting" type="Boolean" access="private" description="Indicates waiting for Server repsonse"/>
+    <!-- handler -->
+    <aura:handler event="c:retrievesObjectEvent" action="{!c.handleRetrievesObjectEvent}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.onRecordIdChange}"/>
+    <aura:handler name="change" value="{!v.recordId}" action="{!c.onRecordIdChange}"/>
+    <!--body -->
+    <aura:if isTrue="{!v.recordId}">
+        <lightning:card iconName="action:apex">
+            <aura:set attribute="title">
+                Viewing {!v.sObjectName.length > 0 ? v.sObjectName : 'sObject'}
+                {!v.fields.Name.length > 0 ? v.fields.Name : ' with Id ' + v.recordId}
+            </aura:set>
+            <aura:set attribute="footer">
+                <lightning:badge label="{!'Last Modified by '+v.lastModifiedBy+' at '+v.lastModifiedDate}"/>
+            </aura:set>
+            <aura:set attribute="actions">
+                <lightning:button label="Edit" onclick="{!c.onEditButtonClick}"/>
+                <lightning:button label="Refresh" onclick="{!c.onRecordIdChange}"/>
+                <lightning:button label="Close" onclick="{!c.onCloseButtonClick}"/>
+            </aura:set>
+            <!-- card body -->
+            <aura:if isTrue="{!v.waiting}">
+                <lightning:spinner aura:id="mySpinner"/>
+            </aura:if>
+            <aura:if isTrue="{!!v.waiting}">
+                <p class="slds-p-horizontal--large">
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Fieldname</p>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Updateable</p>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Type</p>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Value</p>
+                        </lightning:layoutitem>
+                        </lightning:layout>
+                        <aura:iteration items="{!v.fields}" var="field">
+                          <lightning:layout horizontalAlign="space">
+                            <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                                <b>{!field.name}</b>
+                            </lightning:layoutitem>
+                            <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                                <ui:outputCheckbox value="{!field.properties.isUpdateable}"/>
+                            </lightning:layoutitem>
+                            <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                                {!field.properties.displayType}
+                            </lightning:layoutitem>
+                            <lightning:layoutitem size="3" flexibility="auto" padding="around-small">
+                                      {!field.properties.value}
+                            </lightning:layoutitem>
+                          </lightning:layout>
+                        </aura:iteration>
+                </p>
+            </aura:if>
+        </lightning:card>
+    </aura:if>
 </aura:component>
