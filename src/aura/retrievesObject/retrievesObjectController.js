@@ -11,7 +11,8 @@
         } else {
             var evt = $A.get("e.force:navigateToURL");
             var componentName = component.getName();
-            var namespace = componentName.substring(0, componentName.indexOf("RetrievesObjectController"));
+            //hacky 
+            var namespace = componentName.substring(0, componentName.indexOf("R"));
             if($A.util.isEmpty(namespace)){
                 namespace = "c";
             }
