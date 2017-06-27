@@ -10,8 +10,13 @@
             modal.set("v.active", true);
         } else {
             var evt = $A.get("e.force:navigateToURL");
+            var componentName = component.getName();
+            var namespace = componentName.substring(0, componentName.indexOf("RetrievesObjectController"));
+            if($A.util.isEmpty(namespace)){
+                namespace = "c";
+            }
             evt.setParams({
-                url : "../c/lightningWorkbench.app?recordId=" + recordId
+                url : "../"+namespace+"/lightningWorkbench.app?recordId=" + recordId
             });
         evt.fire();
         }
