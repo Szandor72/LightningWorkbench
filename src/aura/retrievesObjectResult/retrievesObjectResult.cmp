@@ -100,7 +100,8 @@
                     </lightning:layout>
                     <aura:iteration items="{!v.fields}" var="field">
                         <aura:if isTrue="{!or(!v.inEditMode,and(v.inEditMode,field.properties.isUpdateable))}">
-                                <c:retrievesObjectResultFieldItem fieldInformation="{!field}" 
+                                <c:retrievesObjectResultFieldItem 
+                                fieldInformation="{!field}" 
                                 searchTerm="{!v.searchTerm}"
                                 inEditMode="{!v.inEditMode}"/>
                         </aura:if>        
