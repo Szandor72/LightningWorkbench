@@ -28,12 +28,38 @@
             </lightning:layoutitem>
             <aura:if isTrue="{!!v.inEditMode}"> <!-- VIEW mode -->
                 <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
-                    {!v.fieldInformation.properties.value}
+                    <aura:if isTrue="{!v.fieldInformation.properties.displayType == 'DATETIME'}">
+                        <ui:outputDateTime value="{!v.fieldInformation.properties.value}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldInformation.properties.displayType == 'DATE'}">
+                        <ui:outputDate value="{!v.fieldInformation.properties.value}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!and(v.fieldInformation.properties.displayType != 'DATE',
+                                            v.fieldInformation.properties.displayType != 'DATETIME')}">
+                        {!v.fieldInformation.properties.value}
+                    </aura:if>
+                    
                 </lightning:layoutitem>
             </aura:if>
-            <aura:if isTrue="{!v.inEditMode}"> <!-- EDIT mode -->
+            <aura:if isTrue="{!and(v.inEditMode,v.fieldInformation.properties.isUpdateable)}"> <!-- EDIT mode -->
                 <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
-                    <lightning:input name="valueEdit" value="{!v.fieldInformation.properties.value}"/>
+                    <aura:if isTrue="{!v.fieldInformation.properties.displayType == 'PICKLIST'}">
+                        <lightning:select name="picklist" 
+                                          label="{!v.fieldInformation.name}"  
+                                          variant="label-hidden" 
+                                          aura:id="picklist" value="{!v.fieldInformation.properties.value}">
+                            <aura:iteration items="{!v.fieldInformation.properties.picklistValues}" var="option">
+                                <option text="{!option.label}" value="{!option.value}" selected="{!v.fieldInformation.properties.value == option.value}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                        <aura:set attribute="else">
+                            <lightning:input name="valueEdit" 
+                                    variant="label-hidden"
+                                    label="{!v.fieldInformation.name}" 
+                                    value="{!v.fieldInformation.properties.value}"/>
+                        </aura:set>
+                    </aura:if>
+                    
                 </lightning:layoutitem>
             </aura:if>    
         </lightning:layout>

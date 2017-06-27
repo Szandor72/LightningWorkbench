@@ -11,17 +11,30 @@
       var validToast = !$A.util.isUndefinedOrNull(toastEvent);
       if (validToast) {
           toastEvent.setParams({
-              "message": "Coming soon. Stay tuned",
+              "message": "Be careful when editing items directly",
               "type": "warning"
           });
           toastEvent.fire();
       }
+      component.set("v.inEditMode", true);
+    },
+
+    onCancelEditButtonClick : function(component, event, helper) {
+        component.set("v.inEditMode", false);
+        component.set("v.searchTerm","");
+    },
+
+    onSaveButtonClick : function(component, event, helper) {
+        helper.doSave(component);
+        component.set("v.inEditMode", false);
+        component.set("v.searchTerm","");
     },
 
     onRecordIdChange: function(component, event, helper) {
         if (!$A.util.isEmpty(component.get("v.recordId"))) {
             helper.retrieveSObjectById(component);
         }
+        component.set("v.searchTerm","");
     },
 
     onCloseButtonClick: function(component, event, helper) {

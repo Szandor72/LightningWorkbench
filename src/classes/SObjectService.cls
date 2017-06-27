@@ -1,7 +1,6 @@
 public class SObjectService {
     public class SObjectServiceException extends exception {  }
     
-    @AuraEnabled
     public static Map<String,Object> retrieve(String recordId) {
         if(!(recordId instanceOf Id)) {
             throw new SobjectServiceException('Not a valid sObject Id');
@@ -46,5 +45,47 @@ public class SObjectService {
         result.put('sObjectName', strSobjectName);
         result.put('fields', fields);
         return result;
+    }
+
+    public static void doUpdate(String recordId, String sObjectName, List<Object> fields) {        
+        Schema.SObjectType targetType = Schema.getGlobalDescribe().get(sObjectName);
+        sObject sObjectToSave = targetType.newSobject(recordId);
+        for (Object field : fields) {
+            Map<String,Object> fieldInfo = (Map<String,Object>)JSON.deserializeUntyped(JSON.serialize(field));            
+            Map<String,Object> fieldProperties = (Map<String,Object>)JSON.deserializeUntyped(JSON.serialize(fieldInfo.get('properties'))); 
+            String fieldName = String.ValueOf(fieldInfo.get('name'));
+            Boolean isUpdateable = Boolean.ValueOf(fieldProperties.get('isUpdateable'));
+            if(isUpdateable) {
+                Object valueObject = fieldProperties.get('value');
+                String value = String.ValueOf(valueObject);
+                String displayType = String.ValueOf(fieldProperties.get('displayType'));
+                if (value == null || value == 'null') {
+                    // skip sObjectToSave.put(fieldName,null);
+                } else {    
+                    if (displayType == 'DATE') {
+                        sObjectToSave.put(fieldName, Date.valueOf(value));
+                    } else if(displayType == 'DATETIME') {
+                        sObjectToSave.put(fieldName, DateTime.valueOfGmt(value));
+                    } else if (displayType == 'PERCENT' || displayType == 'CURRENCY') {
+                        sObjectToSave.put(fieldName, value == '' ? null : Decimal.valueOf(value));
+                    } else if (displayType == 'DOUBLE') {
+                        sObjectToSave.put(fieldName, value == '' ? null : Double.valueOf(value));
+                    } else if (displayType == 'INTEGER') {
+                        sObjectToSave.put(fieldName, Integer.valueOf(value));
+                    } else if (displayType == 'BASE64') {
+                        sObjectToSave.put(fieldName, Blob.valueOf(value));
+                    } else if (displayType == 'BOOLEAN') {
+                        sObjectToSave.put(fieldName, Boolean.valueOf(value));
+                    } else {
+                        sObjectToSave.put(fieldName, value);
+                    }
+                }    
+            }
+        }
+        try {
+            update sObjectToSave;
+        } catch (exception e) {
+            throw new SObjectServiceException(e.getMessage());
+        }
     }
 }

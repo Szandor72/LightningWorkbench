@@ -16,4 +16,19 @@ public with sharing class retrieveSObjectController {
         }
     }
 
+    @AuraEnabled
+    public static AuraActionResponse updatesObject(String recordId, String sObjectName, String fieldsJSON) {
+        AuraActionResponse response = new AuraActionResponse();
+        try {
+            List<Object> fields = (List<Object>)JSON.deserializeUntyped(fieldsJSON);
+            SObjectService.doUpdate(recordId, sObjectName, fields);
+            response.isSuccess = true;
+            response.message = 'Saved ' + sObjectName + ' successfully';
+        } catch (exception e) {
+            response.isSuccess = false;
+            response.message = e.getMessage();
+        }
+        return response; 
+    }
+
 }

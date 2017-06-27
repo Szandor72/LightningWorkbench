@@ -17,11 +17,15 @@
     <aura:attribute name="searchTerm" type="String" access="private" description="Use this to filter Result List"/>
     <aura:attribute name="lastModifiedDate" type="Date" access="private" description="LastModifiedDate"/>
     <aura:attribute name="waiting" type="Boolean" access="private" description="Indicates waiting for Server repsonse"/>
+    <aura:attribute name="messages" type="String" access="private" default=""
+                     description="Messages to the user if no toasts present"/>
+    <aura:attribute name="inEditMode" type="Boolean" access="public" default="false"
+        description="If set to true will turn Value Fields into input fields"/>
     <!-- handler -->
     <aura:handler event="c:retrievesObjectEvent" action="{!c.handleRetrievesObjectEvent}"/>
     <aura:handler name="init" value="{!this}" action="{!c.onRecordIdChange}"/>
     <aura:handler name="change" value="{!v.recordId}" action="{!c.onRecordIdChange}"/>
-    <!--body -->
+    <!--body -->    
     <aura:if isTrue="{!v.recordId}">
         <lightning:card iconName="action:apex">
             <aura:set attribute="title">
@@ -41,14 +45,32 @@
                 <lightning:layoutitem padding="around-small" size="12" flexibility="grow">
                     <p class="slds-p-horizontal--large">Viewing {!v.sObjectName.length > 0 ? v.sObjectName : 'sObject'}
                         {!v.fields.Name.length > 0 ? v.fields.Name : ' with Id ' + v.recordId}</p>
+                    <p class="slds-p-horizontal--large">{!v.messages}</p>    
                 </lightning:layoutitem>  
             </lightning:layout>
             <aura:set attribute="footer">
                 <lightning:badge label="provided with love by appero.com"/>
+                &nbsp;
+                <aura:if isTrue="{!!v.inEditMode}">
+                    <lightning:button label="Edit" onclick="{!c.onEditButtonClick}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.inEditMode}">
+                    <lightning:button label="Save" onclick="{!c.onSaveButtonClick}"/>
+                    <lightning:button label="Cancel editing" onclick="{!c.onCancelEditButtonClick}"/>
+                </aura:if>
+                <lightning:button label="Refresh" onclick="{!c.onRecordIdChange}"/>
+                <!--<lightning:button label="Close" onclick="{!c.onCloseButtonClick}"/>-->
             </aura:set>
             <aura:set attribute="actions">
                 <lightning:badge label="{!'Last Modified by '+v.lastModifiedBy+' at '+v.lastModifiedDate}"/>
-                &nbsp;<lightning:button label="Edit" onclick="{!c.onEditButtonClick}"/>
+                &nbsp;
+                <aura:if isTrue="{!!v.inEditMode}">
+                    <lightning:button label="Edit" onclick="{!c.onEditButtonClick}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.inEditMode}">
+                    <lightning:button label="Save" onclick="{!c.onSaveButtonClick}"/>
+                    <lightning:button label="Cancel editing" onclick="{!c.onCancelEditButtonClick}"/>
+                </aura:if>
                 <lightning:button label="Refresh" onclick="{!c.onRecordIdChange}"/>
                 <!--<lightning:button label="Close" onclick="{!c.onCloseButtonClick}"/>-->
             </aura:set>
@@ -76,7 +98,12 @@
                         </lightning:layoutitem>
                     </lightning:layout>
                     <aura:iteration items="{!v.fields}" var="field">
-                        	<c:retrievesObjectResultFieldItem fieldInformation="{!field}" searchTerm="{!v.searchTerm}"/>
+                        <aura:if isTrue="{!or(!v.inEditMode,and(v.inEditMode,field.properties.isUpdateable))}">
+                                <c:retrievesObjectResultFieldItem 
+                                fieldInformation="{!field}" 
+                                searchTerm="{!v.searchTerm}"
+                                inEditMode="{!v.inEditMode}"/>
+                        </aura:if>        
                     </aura:iteration>
                 </p>
             </aura:if>
