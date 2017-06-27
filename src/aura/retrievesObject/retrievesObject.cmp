@@ -1,42 +1,45 @@
 <aura:component implements="force:hasRecordId,force:hasSobjectName" access="global">
     <aura:registerEvent name="retrievesObjectEvent" type="c:retrievesObjectEvent"/>
+    <aura:attribute name="isUserAdmin" type="Boolean" default="false" description="If false, component will hide"/>
     <aura:attribute name="showResultsOn" type="String" access="private" default="modal"
         description="Results will bei either shown on a 'modal' or on a 'newTab'"/>
     
-    <lightning:layout verticalAlign="end">
-        <lightning:layoutitem padding="around-small" size="8" flexibility="auto" class="validationFix">
-            <lightning:input label="Enter sObject Id" 
-                             name="recordId"
-                             value="{!v.recordId}"
-                             aura:id="input"
-                             placeholder="Enter 15 or 18 character sObject Id"
-                             messageWhenPatternMismatch="A valid sOject Id has 15 or 18 characters, only numbers and letters"
-                             pattern="(\w{18}|\w{15})"/>
-        </lightning:layoutitem>
-        <lightning:layoutitem padding="around-small" size="4" flexibility="auto">            
-            <lightning:button variant="neutral" 
-                              title="Click to retrieve fields" 
-                              label="Retrieve" 
-                              type="Submit" 
-                              name="retrieve"
-                              iconName="utility:search" 
-                              iconPosition="left" 
-                              disabled="{!if(v.recordId.length == 18,false,if(v.recordId.length == 15,false,true))}" 
-                              onclick="{!c.onRetrieveButtonClick}"/>
-        </lightning:layoutitem>    
-    </lightning:layout>
-    <lightning:layout verticalAlign="end">
-        <lightning:layoutitem padding="around-small" size="4" flexibility="no-flex" class="validationFix">
-            <lightning:input label="Modal" type="radio" name="showResultsOn" value="modal" checked="true" onchange="{!c.handleRadioClick}"/>
-        </lightning:layoutitem>
-        <lightning:layoutitem padding="around-small" size="4" flexibility="no-flex" class="validationFix">
-            <lightning:input label="New Tab" type="radio" name="showResultsOn" value="newTab" onchange="{!c.handleRadioClick}"/>
-        </lightning:layoutitem>
-    </lightning:layout>
-    <c:modal aura:id="modal"
-             hideSubmit="true"
-             closeLabel="Close"
-             title="{!v.sObjectName}">
-        <c:retrievesObjectResult recordId="{!v.recordId}"/>
-    </c:modal>
+    <aura:if isTrue="{!v.isUserAdmin}">
+        <lightning:layout verticalAlign="end">
+            <lightning:layoutitem padding="around-small" size="8" flexibility="auto" class="validationFix">
+                <lightning:input label="Enter sObject Id" 
+                                name="recordId"
+                                value="{!v.recordId}"
+                                aura:id="input"
+                                placeholder="Enter 15 or 18 character sObject Id"
+                                messageWhenPatternMismatch="A valid sOject Id has 15 or 18 characters, only numbers and letters"
+                                pattern="(\w{18}|\w{15})"/>
+            </lightning:layoutitem>
+            <lightning:layoutitem padding="around-small" size="4" flexibility="auto">            
+                <lightning:button variant="neutral" 
+                                title="Click to retrieve fields" 
+                                label="Retrieve" 
+                                type="Submit" 
+                                name="retrieve"
+                                iconName="utility:search" 
+                                iconPosition="left" 
+                                disabled="{!if(v.recordId.length == 18,false,if(v.recordId.length == 15,false,true))}" 
+                                onclick="{!c.onRetrieveButtonClick}"/>
+            </lightning:layoutitem>    
+        </lightning:layout>
+        <lightning:layout verticalAlign="end">
+            <lightning:layoutitem padding="around-small" size="4" flexibility="no-flex" class="validationFix">
+                <lightning:input label="Modal" type="radio" name="showResultsOn" value="modal" checked="true" onchange="{!c.handleRadioClick}"/>
+            </lightning:layoutitem>
+            <lightning:layoutitem padding="around-small" size="4" flexibility="no-flex" class="validationFix">
+                <lightning:input label="New Tab" type="radio" name="showResultsOn" value="newTab" onchange="{!c.handleRadioClick}"/>
+            </lightning:layoutitem>
+        </lightning:layout>
+        <c:modal aura:id="modal"
+                hideSubmit="true"
+                closeLabel="Close"
+                title="{!v.sObjectName}">
+            <c:retrievesObjectResult recordId="{!v.recordId}"/>
+        </c:modal>
+    </aura:if>
 </aura:component>

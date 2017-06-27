@@ -4,11 +4,17 @@ public with sharing class retrieveSObjectController {
         try {
             Map<String,Object> result = new Map<String,Object>();
             result = SobjectService.retrieve(recordId);
+            Boolean isUserAdmin = false;
+            User u = [SELECT Id, Profile.PermissionsModifyAllData, Profile.PermissionsViewAllData FROM User WHERE Id = :UserInfo.getUserId()];
+            if(u.Profile.PermissionsModifyAllData && u.Profile.PermissionsViewAllData) {
+                isUserAdmin = true;
+            }
             AuraActionResponse response = new  AuraActionResponse();
             response.values.put('sObjectName',result.get('sObjectName'));
             response.values.put('lastModifiedBy',result.get('lastModifiedBy'));
             response.values.put('lastModifiedDate',result.get('lastModifiedDate'));
             response.values.put('fields', JSON.serialize(result.get('fields')));
+            response.values.put('isUserAdmin', isUserAdmin);
             response.message  = (String)result.get('sObjectName');
             return response;
         } catch (exception e) {
