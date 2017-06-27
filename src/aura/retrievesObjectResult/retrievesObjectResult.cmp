@@ -26,7 +26,7 @@
         <lightning:card iconName="action:apex">
             <aura:set attribute="title">
                 <lightning:layout verticalAlign="end">
-                    <lightning:layoutitem padding="around-small" size="6" flexibility="shrink">
+                    <lightning:layoutitem padding="around-small" size="6" flexibility="auto">
                         <lightning:input label="Search Results" 
                                          name="search"
                                          value="{!v.searchTerm}"

@@ -34,7 +34,6 @@
                             component.set('v.sObjectName', result.values.sObjectName);
                             component.set('v.lastModifiedBy', result.values.lastModifiedBy);
                             component.set('v.lastModifiedDate', result.values.lastModifiedDate);
-                            debugger;
                             var fieldsObject = JSON.parse(result.values.fields);
                             var fields = [];
                             for (var fieldName in fieldsObject) {

@@ -1,30 +1,41 @@
 <aura:component access="global"
     description="Receives field information by sObjectRetrieve and displays or edits accordingly">
+    <!-- publics-->
     <aura:attribute name="fieldInformation" type="Object" access="public" default="{}"
         description="Holds Field Describe Information"/>
     <aura:attribute name="inEditMode" type="Boolean" access="public" default="false"
         description="If set to true will turn Value Fields into input fields"/>
     <aura:attribute name="searchTerm" type="String" access="public" description="Use this to filter Result List"/>
+    <!-- privates -->
     <aura:attribute name="isMatch" type="Boolean" access="private" default="true"
-        description="If true, fieldItem matches Filter Criteria"/>  
+        description="If true, fieldItem matches Filter Criteria"/>
+    <!-- handlers -->
+    <aura:handler name="change" value="{!v.searchTerm}" action="{!c.onSearchtermChange}" />
     <!-- body --> 
-    <aura:if isTrue="{!v.isMatch}">
-	<lightning:layout horizontalAlign="space">
-        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
-            <b>{!v.fieldInformation.name}</b>
-        </lightning:layoutitem>
-        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
-            {!v.fieldInformation.properties.label}
-        </lightning:layoutitem>
-        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
-            <ui:outputCheckbox value="{!v.fieldInformation.properties.isUpdateable}"/>
-        </lightning:layoutitem>
-        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
-            {!v.fieldInformation.properties.displayType}
-        </lightning:layoutitem>
-        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
-            {!v.fieldInformation.properties.value}
-        </lightning:layoutitem>
-    </lightning:layout>  
+    <aura:if isTrue="{!v.isMatch}"> <!-- will hide itself if searchTerm doesnt match -->
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                <b>{!v.fieldInformation.name}</b>
+            </lightning:layoutitem>
+            <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                {!v.fieldInformation.properties.label}
+            </lightning:layoutitem>
+            <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                <ui:outputCheckbox value="{!v.fieldInformation.properties.isUpdateable}"/>
+            </lightning:layoutitem>
+            <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                {!v.fieldInformation.properties.displayType}
+            </lightning:layoutitem>
+            <aura:if isTrue="{!!v.inEditMode}"> <!-- VIEW mode -->
+                <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                    {!v.fieldInformation.properties.value}
+                </lightning:layoutitem>
+            </aura:if>
+            <aura:if isTrue="{!v.inEditMode}"> <!-- EDIT mode -->
+                <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                    <lightning:input name="valueEdit" value="{!v.fieldInformation.properties.value}"/>
+                </lightning:layoutitem>
+            </aura:if>    
+        </lightning:layout>
     </aura:if>    
 </aura:component>
