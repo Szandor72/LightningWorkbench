@@ -1,0 +1,58 @@
+<aura:component access="global">
+    <aura:attribute name="title" type="String" default="Title" required="true" access="public" description="Title of modal Header. Required. "/>
+    <aura:attribute name="closeable" type="Boolean" default="true" access="public" description="Modal can be closed by user."/>
+    <aura:attribute name="hideSubmit" type="Boolean" access="public" description="If true, the submit Button will not be rendered" default="false"/>
+    <aura:attribute name="active" type="Boolean" access="public" default="false" description="Determines if the modal will be displayed"/>
+    <aura:attribute name="size" type="String" access="public" default="default" description="If set to large, modal displays in full width"/>
+
+    <aura:attribute name="closeLabel" type="String" access="public" default="Cancel" description="Text/Label on Close Buttons"/>
+    <aura:attribute name="confirmLabel" type="String" access="public" default="Submit" description="Text/Label on Confirm Buttons"/>
+    <aura:attribute name="waitingLabel" type="String" access="public" default="Working..." description="Text/Label on disabled/waiting confirm buttons" />
+    <aura:attribute name="waiting" type="Boolean" access="public" description="Will disabled confirm button (e.g. while waiting for an servercall)"/>
+    <aura:attribute name="errormessage" type="String" access="public" description="Can be used to show simple errormessages"/>
+    <aura:attribute name="showError" type="Boolean" access="public" description="Indicates an errormessage needs to be displayed"/>
+    <aura:attribute name="onClose" type="Aura.Action" access="public" default="{!c.defaultCloseAction}"/>
+    <aura:attribute name="onConfirm" type="Aura.Action" access="public" default="{!c.defaultCloseAction}"/>
+
+    <aura:handler name="change" value="{!v.waiting}" action="{!c.onWaitingChange}"/>
+    <aura:handler name="change" value="{!v.active}" action="{!c.onActiveChange}"/>
+    <div role="dialog" tabindex="-1" aria-labelledby="modal" class="{! (v.active ? 'slds-modal slds-fade-in-open' : 'slds-modal') + (and(v.active, v.size == 'large') ? ' slds-modal_large ' : '')}" aura:id="modal">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <button onclick="{!v.onClose}" class="slds-button slds-modal__close slds-button--icon-inverse" style="{!if(v.closeable,'','display:none; ')+'text-align:right;'}">
+                    <lightning:icon iconName="utility:close" size="small" title="{!v.closeLabel}" alternativeText="{!v.closeLabel}"/>
+                </button>
+                <h2 id="header43" class="slds-text-heading--medium" aura:id="modalHeader">{!v.title}</h2>
+            </div>
+            <div class="slds-modal__content" aura:id="modalContent" style="position: inherit;">
+
+                <aura:if isTrue="{!v.waiting}">
+                    <div class="spinner-container__own">
+                            <lightning:spinner size="large" alternativeText="Loading" class="waiting-spinner"/>
+                    </div>
+                </aura:if>
+
+                <div class="slds-p-around--medium">
+                    
+                    <div style="{! v.showError ? 'display: none' : '' }">
+                        {!v.body}
+                    </div>
+                    
+                    
+                    <div style="{! v.showError ? '' : 'display: none' }">
+                        {!v.errormessage}
+                    </div>
+                </div>
+     
+                
+            </div>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button--neutral" onclick="{!v.onClose}" style="{! v.closeable ? '' : 'display:none;'}">{!v.closeLabel}</button>
+                <aura:if isTrue="{! !v.hideSubmit}">
+                    <ui:button disabled="{!v.waiting}" class="slds-button slds-button--brand" press="{!v.onConfirm}" label="{!v.waiting? v.waitingLabel : v.confirmLabel}"/>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+    <div class="{!v.active ? 'slds-backdrop slds-backdrop--open' : 'slds-backdrop'}" aura:id="modalBackdrop"></div>
+</aura:component>

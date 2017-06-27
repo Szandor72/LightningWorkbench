@@ -1,0 +1,67 @@
+<aura:component access="global"
+    description="Receives field information by sObjectRetrieve and displays or edits accordingly">
+    <!-- publics-->
+    <aura:attribute name="fieldInformation" type="Object" access="public" default="{}"
+        description="Holds Field Describe Information"/>
+    <aura:attribute name="inEditMode" type="Boolean" access="public" default="false"
+        description="If set to true will turn Value Fields into input fields"/>
+    <aura:attribute name="searchTerm" type="String" access="public" description="Use this to filter Result List"/>
+    <!-- privates -->
+    <aura:attribute name="isMatch" type="Boolean" access="private" default="true"
+        description="If true, fieldItem matches Filter Criteria"/>
+    <!-- handlers -->
+    <aura:handler name="change" value="{!v.searchTerm}" action="{!c.onSearchtermChange}" />
+    <!-- body --> 
+    <aura:if isTrue="{!v.isMatch}"> <!-- will hide itself if searchTerm doesnt match -->
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                <b>{!v.fieldInformation.name}</b>
+            </lightning:layoutitem>
+            <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                {!v.fieldInformation.properties.label}
+            </lightning:layoutitem>
+            <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                <ui:outputCheckbox value="{!v.fieldInformation.properties.isUpdateable}"/>
+            </lightning:layoutitem>
+            <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                {!v.fieldInformation.properties.displayType}
+            </lightning:layoutitem>
+            <aura:if isTrue="{!!v.inEditMode}"> <!-- VIEW mode -->
+                <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                    <aura:if isTrue="{!v.fieldInformation.properties.displayType == 'DATETIME'}">
+                        <ui:outputDateTime value="{!v.fieldInformation.properties.value}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldInformation.properties.displayType == 'DATE'}">
+                        <ui:outputDate value="{!v.fieldInformation.properties.value}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!and(v.fieldInformation.properties.displayType != 'DATE',
+                                            v.fieldInformation.properties.displayType != 'DATETIME')}">
+                        {!v.fieldInformation.properties.value}
+                    </aura:if>
+                    
+                </lightning:layoutitem>
+            </aura:if>
+            <aura:if isTrue="{!and(v.inEditMode,v.fieldInformation.properties.isUpdateable)}"> <!-- EDIT mode -->
+                <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                    <aura:if isTrue="{!v.fieldInformation.properties.displayType == 'PICKLIST'}">
+                        <lightning:select name="picklist" 
+                                          label="{!v.fieldInformation.name}"  
+                                          variant="label-hidden" 
+                                          aura:id="picklist" value="{!v.fieldInformation.properties.value}">
+                            <aura:iteration items="{!v.fieldInformation.properties.picklistValues}" var="option">
+                                <option text="{!option.label}" value="{!option.value}" selected="{!v.fieldInformation.properties.value == option.value}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                        <aura:set attribute="else">
+                            <lightning:input name="valueEdit" 
+                                    variant="label-hidden"
+                                    label="{!v.fieldInformation.name}" 
+                                    value="{!v.fieldInformation.properties.value}"/>
+                        </aura:set>
+                    </aura:if>
+                    
+                </lightning:layoutitem>
+            </aura:if>    
+        </lightning:layout>
+    </aura:if>    
+</aura:component>

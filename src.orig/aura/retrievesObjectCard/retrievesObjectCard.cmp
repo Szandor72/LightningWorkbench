@@ -1,0 +1,12 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" controller="retrieveSObjectController" access="global" >
+<aura:attribute name="isUserAdmin" type="Boolean" default="false" description="If false, component will hide"/>
+<aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:if isTrue="{!v.isUserAdmin}">    
+        <lightning:card iconName="utility:database">
+            <aura:set attribute="title">
+                retrieve sObject by Id
+            </aura:set>
+            <c:retrievesObject recordId="{!v.recordId}" isUserAdmin="{!v.isUserAdmin}"/>
+        </lightning:card>
+    </aura:if>    
+</aura:component>
