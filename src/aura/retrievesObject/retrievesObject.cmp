@@ -1,4 +1,4 @@
-<aura:component implements="force:hasRecordId" access="global">
+<aura:component implements="force:hasRecordId,force:hasSobjectName" access="global">
     <aura:registerEvent name="retrievesObjectEvent" type="c:retrievesObjectEvent"/>
     <aura:attribute name="showResultsOn" type="String" access="private" default="modal"
         description="Results will bei either shown on a 'modal' or on a 'newTab'"/>
@@ -35,7 +35,8 @@
     </lightning:layout>
     <c:modal aura:id="modal"
              hideSubmit="true"
-             closeLabel="Close">
+             closeLabel="Close"
+             title="{!v.sObjectName}">
         <c:retrievesObjectResult recordId="{!v.recordId}"/>
     </c:modal>
 </aura:component>

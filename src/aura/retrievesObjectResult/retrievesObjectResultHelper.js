@@ -45,7 +45,7 @@
                             }
                             fields.sort(dynamicSort("name"));
                             component.set('v.fields', fields);
-                            message = "Retrieved succesful: " + result.message;
+                            message = "Retrieved successfully: " + result.message;
                             type = "success";
                         } catch (ex) {
                             message = "Script Exception: " + ex.message;

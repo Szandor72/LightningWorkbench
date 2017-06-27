@@ -4,6 +4,11 @@
         description="Holds Field Describe Information"/>
     <aura:attribute name="inEditMode" type="Boolean" access="public" default="false"
         description="If set to true will turn Value Fields into input fields"/>
+    <aura:attribute name="searchTerm" type="String" access="public" description="Use this to filter Result List"/>
+    <aura:attribute name="isMatch" type="Boolean" access="private" default="true"
+        description="If true, fieldItem matches Filter Criteria"/>  
+    <!-- body --> 
+    <aura:if isTrue="{!v.isMatch}">
 	<lightning:layout horizontalAlign="space">
         <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
             <b>{!v.fieldInformation.name}</b>
@@ -20,5 +25,6 @@
         <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
             {!v.fieldInformation.properties.value}
         </lightning:layoutitem>
-    </lightning:layout>
+    </lightning:layout>  
+    </aura:if>    
 </aura:component>
