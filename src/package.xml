@@ -10,6 +10,7 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>lightningWorkbench</members>
         <members>modal</members>
         <members>retrievesObject</members>
         <members>retrievesObjectCard</members>

@@ -17,6 +17,7 @@
     <aura:attribute name="searchTerm" type="String" access="private" description="Use this to filter Result List"/>
     <aura:attribute name="lastModifiedDate" type="Date" access="private" description="LastModifiedDate"/>
     <aura:attribute name="waiting" type="Boolean" access="private" description="Indicates waiting for Server repsonse"/>
+    <aura:attribute name="isUserAdmin" type="Boolean" default="false" description="If false, component will hide"/>
     <aura:attribute name="messages" type="String" access="private" default=""
                      description="Messages to the user if no toasts present"/>
     <aura:attribute name="inEditMode" type="Boolean" access="public" default="false"
@@ -26,7 +27,7 @@
     <aura:handler name="init" value="{!this}" action="{!c.onRecordIdChange}"/>
     <aura:handler name="change" value="{!v.recordId}" action="{!c.onRecordIdChange}"/>
     <!--body -->    
-    <aura:if isTrue="{!v.recordId}">
+    <aura:if isTrue="{!and(v.recordId,v.isUserAdmin)}">
         <lightning:card iconName="action:apex">
             <aura:set attribute="title">
                 <lightning:layout verticalAlign="end">

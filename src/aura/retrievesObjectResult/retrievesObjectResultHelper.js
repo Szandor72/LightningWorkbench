@@ -34,6 +34,7 @@
                             component.set('v.sObjectName', result.values.sObjectName);
                             component.set('v.lastModifiedBy', result.values.lastModifiedBy);
                             component.set('v.lastModifiedDate', result.values.lastModifiedDate);
+                            component.set('v.isUserAdmin', result.values.isUserAdmin);
                             var fieldsObject = JSON.parse(result.values.fields);
                             var fields = [];
                             for (var fieldName in fieldsObject) {
@@ -101,6 +102,11 @@
                     type = "success";
                     component.set("v.inEditMode", false);
                     component.set("v.searchTerm","");
+                    var refresh = $A.get("e.force:refreshView");
+                    if(!$A.util.isEmpty(refresh)) {
+                        refresh.fire();
+                    }
+
                 } else {
                     message = result.message;
                     type = "error";
