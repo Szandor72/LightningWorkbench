@@ -1,7 +1,7 @@
 #Salesforce (DX, force code, etc)
 .vim-force.com
 .vscode
-force.json
+#force.json
 .sfdx
 *.sublime-project
 *.sublime-workspace
