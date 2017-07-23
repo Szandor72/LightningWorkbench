@@ -40,7 +40,8 @@ public class SObjectService {
             }
         }
         Map<String,Object> result = new Map<String,Object>();
-        result.put('lastModifiedBy', ((User)valueMap.get('LastModifiedBy')).Name);
+        String lastModified = valueMap.get('LastModifiedBy') != null ? ((User)valueMap.get('LastModifiedBy')).Name : 'System';
+        result.put('lastModifiedBy', lastModified);
         result.put('lastModifiedDate', valueMap.get('LastModifiedDate'));
         result.put('sObjectName', strSobjectName);
         result.put('fields', fields);
