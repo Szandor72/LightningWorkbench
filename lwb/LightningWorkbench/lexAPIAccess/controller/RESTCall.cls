@@ -1,6 +1,5 @@
 public class RESTCall {
     public static void callOut() {
-        //Make sure your Salesforce instance URL is added in remote site settings
         String sfdcURL = URL.getOrgDomainUrl().toExternalForm(); 
         String restAPIURL = sfdcURL + '/services/data/v45.0/sobjects';  
         
@@ -41,8 +40,7 @@ public class RESTCall {
         
         
         Database.SaveResult publishResult = EventBus.publish(responseEvent);
-        system.assert(publishResult.isSuccess(), 'Error on PE Insert');
-        //System.debug(' ** response ** : ' + response ); 
+        system.assert(publishResult.isSuccess(), 'Error on Platform Event Insert');
     }
     
     @future(callout=true)
@@ -52,7 +50,6 @@ public class RESTCall {
     
     @AuraEnabled
     public static void lightningCallout() {
-        //callout();
         futureCallout();
     }
     
