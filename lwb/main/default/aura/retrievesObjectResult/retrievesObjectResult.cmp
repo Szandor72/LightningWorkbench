@@ -1,0 +1,113 @@
+<aura:component implements="force:hasRecordId"
+                access="global"
+                controller="retrieveSObjectController"
+                description="Given a recordId will display all fields. Also offers updates on values.">
+    <!-- privates -->
+    <aura:attribute name="fields"
+                    type="Object[]"
+                    access="private"
+                    description="DTO containing fieldDescribe information"
+                    />
+    <aura:attribute name="sObjectName"
+                    type="String"
+                    access="private"
+                    description="Name of the retrieved sObject"
+                    />
+    <aura:attribute name="lastModifiedBy" type="String" access="private" description="LostModifiedBy.Name"/>
+    <aura:attribute name="searchTerm" type="String" access="private" description="Use this to filter Result List"/>
+    <aura:attribute name="lastModifiedDate" type="Date" access="private" description="LastModifiedDate"/>
+    <aura:attribute name="waiting" type="Boolean" access="private" description="Indicates waiting for Server repsonse"/>
+    <aura:attribute name="isUserAdmin" type="Boolean" default="false" description="If false, component will hide"/>
+    <aura:attribute name="messages" type="String" access="private" default=""
+                     description="Messages to the user if no toasts present"/>
+    <aura:attribute name="inEditMode" type="Boolean" access="public" default="false"
+        description="If set to true will turn Value Fields into input fields"/>
+    <!-- handler -->
+    <aura:handler event="c:retrievesObjectEvent" action="{!c.handleRetrievesObjectEvent}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.onRecordIdChange}"/>
+    <aura:handler name="change" value="{!v.recordId}" action="{!c.onRecordIdChange}"/>
+    <!--body -->    
+    <aura:if isTrue="{!and(v.recordId,v.isUserAdmin)}">
+        <lightning:card iconName="action:apex">
+            <aura:set attribute="title">
+                <lightning:layout verticalAlign="end">
+                    <lightning:layoutitem padding="around-small" size="6" flexibility="auto">
+                        <lightning:input label="Search Results" 
+                                         name="search"
+                                         value="{!v.searchTerm}"
+                                         aura:id="input"
+                                         placeholder="Type at least 2 characters to filter..."
+                                         messageWhenBadInput="Type at least 2 characters to filter..."
+                                         minlength="2"/>
+                    </lightning:layoutitem>
+                </lightning:layout>
+            </aura:set>
+            <lightning:layout verticalAlign="center" horizontalAlign="center">
+                <lightning:layoutitem padding="around-small" size="12" flexibility="grow">
+                    <p class="slds-p-horizontal--large">Viewing {!v.sObjectName.length > 0 ? v.sObjectName : 'sObject'}
+                        {!v.fields.Name.length > 0 ? v.fields.Name : ' with Id ' + v.recordId}</p>
+                    <p class="slds-p-horizontal--large">{!v.messages}</p>    
+                </lightning:layoutitem>  
+            </lightning:layout>
+            <aura:set attribute="footer">
+                <lightning:badge label="provided with love by appero.com"/>
+                &nbsp;
+                <aura:if isTrue="{!!v.inEditMode}">
+                    <lightning:button label="Edit" onclick="{!c.onEditButtonClick}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.inEditMode}">
+                    <lightning:button label="Save" onclick="{!c.onSaveButtonClick}"/>
+                    <lightning:button label="Cancel editing" onclick="{!c.onCancelEditButtonClick}"/>
+                </aura:if>
+                <lightning:button label="Refresh" onclick="{!c.onRecordIdChange}"/>
+                <!--<lightning:button label="Close" onclick="{!c.onCloseButtonClick}"/>-->
+            </aura:set>
+            <aura:set attribute="actions">
+                <lightning:badge label="{!'Last Modified by '+v.lastModifiedBy+' at '+v.lastModifiedDate}"/>
+                &nbsp;
+                <aura:if isTrue="{!!v.inEditMode}">
+                    <lightning:button label="Edit" onclick="{!c.onEditButtonClick}"/>
+                </aura:if>
+                <aura:if isTrue="{!v.inEditMode}">
+                    <lightning:button label="Save" onclick="{!c.onSaveButtonClick}"/>
+                    <lightning:button label="Cancel editing" onclick="{!c.onCancelEditButtonClick}"/>
+                </aura:if>
+                <lightning:button label="Refresh" onclick="{!c.onRecordIdChange}"/>
+                <!--<lightning:button label="Close" onclick="{!c.onCloseButtonClick}"/>-->
+            </aura:set>
+            <!-- card body -->
+            <aura:if isTrue="{!v.waiting}">
+                <lightning:spinner aura:id="mySpinner"/>
+            </aura:if>
+            <aura:if isTrue="{!!v.waiting}">
+                <p class="slds-p-horizontal--large">
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">API Fieldname</p>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Label</p>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Updateable</p>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Type</p>
+                        </lightning:layoutitem>
+                        <lightning:layoutitem size="2" flexibility="auto" padding="around-small">
+                            <p class="slds-text-heading--medium">Value</p>
+                        </lightning:layoutitem>
+                    </lightning:layout>
+                    <aura:iteration items="{!v.fields}" var="field">
+                        <aura:if isTrue="{!or(!v.inEditMode,and(v.inEditMode,field.properties.isUpdateable))}">
+                                <c:retrievesObjectResultFieldItem 
+                                fieldInformation="{!field}" 
+                                searchTerm="{!v.searchTerm}"
+                                inEditMode="{!v.inEditMode}"/>
+                        </aura:if>        
+                    </aura:iteration>
+                </p>
+            </aura:if>
+        </lightning:card>
+    </aura:if>
+</aura:component>
