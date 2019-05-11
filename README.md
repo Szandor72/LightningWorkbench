@@ -2,14 +2,16 @@
 
 Tools for awesome Salesforce Admins and Devs
 
+[!Screenshot API Access / sObject Retrieve](https://i.imgur.com/9kjl8Ek.png)
+
 # Purpose
 
 Open Source Package that functions
 
-1.  as a test package for a CumulusCI setup
-2.  as a test package for SalesforceDX workflow - cf. http://www.shoreforce.net (German)
-3.  Exemplary folder usage for a DX project
-4.  Hacky way to get straightforward API Access via Lightning
+1.  as a test package for SalesforceDX workflow - cf. http://www.shoreforce.net (German)
+2.  Exemplary folder usage for a DX project
+3.  Hacky way to get straightforward API Access via Lightning
+4.  as a test package for a CumulusCI setup - dated
 5.  attempt at providing some Salesforce Workbench Functions and other Goodies within Salesforce Lightning Experience - stalled.
 
 # Content
