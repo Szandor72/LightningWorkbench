@@ -1,3 +1,0 @@
-<aura:event type="APPLICATION" description="sObjectRetrieve Event containing recordId" access="global">
-    <aura:attribute name="recordId" type="String"/>
-</aura:event>
