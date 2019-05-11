@@ -5,6 +5,7 @@ force.json
 .sfdx
 *.sublime-project
 *.sublime-workspace
+tmp
 
 #CCI
 test_results.json
