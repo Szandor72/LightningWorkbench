@@ -1,8 +1,5 @@
 {
-  "packageDirectories" : [
-            { "path" : "lwb", "default": true}
-  ],
+  "packageDirectories": [{ "path": "lwb", "default": true }],
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "40.0",
-  "enableTokenEncryption": false
+  "sourceApiVersion": "45.0"
 }

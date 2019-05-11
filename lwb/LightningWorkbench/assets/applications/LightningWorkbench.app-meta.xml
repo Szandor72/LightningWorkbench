@@ -18,12 +18,12 @@
     <formFactors>Large</formFactors>
     <label>Lightning Workbench</label>
     <navType>Standard</navType>
-    <tab>standard-Account</tab>
-    <tab>standard-Contact</tab>
-    <tab>standard-Case</tab>
-    <tab>standard-Lead</tab>
-    <tab>standard-Opportunity</tab>
-    <tab>standard-Pricebook2</tab>
-    <tab>standard-File</tab>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>standard-Case</tabs>
+    <tabs>standard-Lead</tabs>
+    <tabs>standard-Opportunity</tabs>
+    <tabs>standard-Pricebook2</tabs>
+    <tabs>standard-File</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
