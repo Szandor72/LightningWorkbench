@@ -1,8 +1,9 @@
 {
   "country": "US",
   "edition": "Developer",
-  "orgPreferences" : {
-    "s1DesktopEnabled" : true,
-    "chatterEnabled" : true
+  "hasSampleData": "true",
+  "orgPreferences": {
+    "s1DesktopEnabled": true,
+    "chatterEnabled": true
   }
 }
