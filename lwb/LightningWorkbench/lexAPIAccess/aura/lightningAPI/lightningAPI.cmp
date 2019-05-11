@@ -1,0 +1,23 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="RESTCall">
+   
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    
+    <aura:attribute name="response" type="String" default="no response yet"/>
+    
+    <lightning:empAPI aura:id="empAPI"/>
+    
+    <lightning:card title="API Access">
+        <div class="slds-p-around_medium">
+    
+    URI: <pre>/services/data/v45.0/sobjects/Account</pre>
+    
+    
+    <lightning:button label="callout" onclick="{!c.call}"/>
+       
+    <div>
+    {!v.response}
+    </div>
+    
+             </div>
+    </lightning:card>
+</aura:component>
