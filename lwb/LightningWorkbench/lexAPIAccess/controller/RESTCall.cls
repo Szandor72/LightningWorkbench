@@ -34,7 +34,7 @@ public class RESTCall {
         if (responseSubstrings.size()>1) {
             for (Integer i = 1; i < responseSubstrings.size(); i++) {
                 String suffix = String.valueOf(i);
-                String fieldName = 'szDev__continuedPayload'+suffix+'__c';
+                String fieldName = 'continuedPayload'+suffix+'__c';
                 responseEvent.put(fieldName, responseSubstrings[i]);
             }
         }
