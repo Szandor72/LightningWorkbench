@@ -2,7 +2,8 @@
 
 Tools for awesome Salesforce Admins and Devs
 
-[!Screenshot API Access / sObject Retrieve](https://i.imgur.com/9kjl8Ek.png)
+![Screenshot API Access / sObject Retrieve](https://i.imgur.com/9kjl8Ek.png)
+
 
 # Purpose
 
